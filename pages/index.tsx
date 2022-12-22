@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next'
 import { PrismaClient } from '.prisma/client'
 import { type Card } from "@prisma/client"
 import CardDisplay from '../components/carddisplay'
-const inter = Inter({ subsets: ['latin'] })
 
 const prisma = new PrismaClient();
 

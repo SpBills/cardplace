@@ -8,7 +8,7 @@ export default ({ card: { uid, image, name, price } }: { card: Card }) => {
         <img src={image} alt="Person using a pen to cross a task off a productivity paper card." className="h-full w-full object-cover object-center group-hover:opacity-75" />
       </div>
       <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-        <h3>{name}</h3>
+        <h3 className="font-bold md:font-normal text-xl md:text-lg">{name}</h3>
         <p>${price}</p>
       </div>
     </Link>
