@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 const average = (array: Array<number>) => array.length === 0 ? 0 : array.reduce((a, b) => a + b, 0) / array.length;
 
-export default ({ card: { price, name, image, description, reviews }}: { card: Card & { reviews: Review[] } }) => {
+export default ({ card: { uid, price, name, image, description, reviews }}: { card: Card & { reviews: Review[] } }) => {
   const [reviewAverage, setReviewAverage] = useState(0);
 
   useEffect(() => {
@@ -56,8 +56,11 @@ export default ({ card: { price, name, image, description, reviews }}: { card: C
             </div>
 
             <div className="mt-8 lg:col-span-5">
-              <button type="submit" className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Purchase</button>
-
+              <form action="/api/checkout_sessions" method="POST">
+                <input name="uid" defaultValue={uid} hidden /> 
+                <input name="quantity" defaultValue={1} hidden /> 
+                <button type="submit" className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Purchase</button>
+              </form>
               <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Description</h2>
 
@@ -82,7 +85,7 @@ export default ({ card: { price, name, image, description, reviews }}: { card: C
                 <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                   <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
                     <dt>
-                      <svg className="mx-auto h-6 w-6 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <svg className="mx-auto h-6 w-6 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64" />
                       </svg>
                       <span className="mt-4 text-sm font-medium text-gray-900">American Made</span>

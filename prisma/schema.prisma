@@ -26,6 +26,16 @@ model Card {
   image String
   description String?
   reviews Review[]
+  purchases Purchases[]
+}
+
+model Purchases {
+  uid String @id @default(uuid())
+  quantity Int
+  product Card @relation(fields: [productUid], references: [uid])
+  productUid String
+  user User @relation(fields: [userUid], references: [uid])
+  userUid String
 }
 
 model User {
@@ -33,4 +43,5 @@ model User {
   firstName String
   lastName  String
   reviews Review[]
+  purchases Purchases[]
 }
