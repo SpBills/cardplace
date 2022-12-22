@@ -1,4 +1,5 @@
-# Card shop portfolio project
+# CardPlace
+A simple NextJS application showcasing my skill using TailwindCSS, PostgreSQL, Prisma, and other technologies.
 
 ## Setup
 
